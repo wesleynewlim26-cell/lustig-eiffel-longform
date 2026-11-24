@@ -4,10 +4,10 @@ type Props = {};
 
 const calculateMetadata: CalculateMetadataFunction<Props> = () => {
   return {
-    durationInFrames: 5400,
+    durationInFrames: 3600,
     fps: 30,
-    width: 1280,
-    height: 720,
+    width: 720,
+    height: 1280,
   };
 };
 
@@ -681,17 +681,17 @@ function drawCaption(ctx: CanvasRenderingContext2D, w: number, h: number, text: 
   ctx.restore();
 }
 
-// Scene draw functions - each receives local progress 0-1 within its scene
+// Scene draw functions - vertical 9:16 layout (720x1280)
 function drawScene1(ctx: CanvasRenderingContext2D, w: number, h: number, p: number) {
-  drawNewspaper(ctx, w/2, h/2 - 50, 1.5, clamp(p, 0, 1));
-  drawCharacter(ctx, w/2, h/2 + 180, 0.6 * easeOutBack(clamp(p, 0, 1)), {
+  drawNewspaper(ctx, w/2, h/2 - 100, 1.2, clamp(p, 0, 1));
+  drawCharacter(ctx, w/2, h/2 + 280, 0.7 * easeOutBack(clamp(p, 0, 1)), {
     hat: true,
     suitColor: "#0a0a1a",
     mouth: "smirk",
     blink: Math.floor(p * FPS * 180) % 60 < 3,
     headTilt: Math.sin(p * 2) * 0.05,
   });
-  drawCaption(ctx, w, h, "1925: MENARA EIFFEL DIJUAL\nDUA KALI", clamp(p * 10, 0, 1));
+  drawCaption(ctx, w, h, "1925: MENARA EIFFEL DIJUAL\nDUA KALI", clamp(p * 10, 0, 1), 0.85);
 }
 
 function drawScene2(ctx: CanvasRenderingContext2D, w: number, h: number, p: number) {
@@ -702,37 +702,37 @@ function drawScene2(ctx: CanvasRenderingContext2D, w: number, h: number, p: numb
   ctx.fillStyle = skyGrad;
   ctx.fillRect(0, 0, w, h);
   
-  drawEiffelTower(ctx, w/2, h - 50, 1.2, charProg * 0.3);
+  drawEiffelTower(ctx, w/2, h - 50, 1.5, charProg * 0.3);
   drawLabel(ctx, w/2, 80, "PARIS 1925", "#0a0a1a", "#ffd700");
   drawLabel(ctx, w/2, 140, "7.300 TON BESI BERKARAT", "#0a0a1a", "#ffaa44");
-  drawCaption(ctx, w, h, "MENARA HARUS DIBONGKAR 1909\nPERANG SELAMATKAN NYA", clamp(p * 8, 0, 1));
+  drawCaption(ctx, w, h, "MENARA HARUS DIBONGKAR 1909\nPERANG SELAMATKAN NYA", clamp(p * 8, 0, 1), 0.85);
 }
 
 function drawScene3(ctx: CanvasRenderingContext2D, w: number, h: number, p: number) {
   const charProg = clamp(p, 0, 1);
-  drawHotelScene(ctx, w/2, h/2 + 30, charProg, 6);
-  drawLabel(ctx, w/2, 60, "HOTEL CRILLON • 6 DEALER", "#0a0a1a", "#ffd700");
-  drawCaption(ctx, w, h, "VICTOR LUSTIG UNDANG DEALER BESI\nWHISKY TERSEMBUNYI DI LACI", clamp(p * 8, 0, 1));
+  drawHotelScene(ctx, w/2, h/2 + 50, charProg, 6);
+  drawLabel(ctx, w/2, 80, "HOTEL CRILLON • 6 DEALER", "#0a0a1a", "#ffd700");
+  drawCaption(ctx, w, h, "VICTOR LUSTIG UNDANG DEALER BESI\nWHISKY TERSEMBUNYI DI LACI", clamp(p * 8, 0, 1), 0.85);
 }
 
 function drawScene4(ctx: CanvasRenderingContext2D, w: number, h: number, p: number) {
   const charProg = clamp(p, 0, 1);
-  drawHotelScene(ctx, w/2, h/2 + 30, 1, 6, 2);
+  drawHotelScene(ctx, w/2, h/2 + 50, 1, 6, 2);
   
   ctx.save();
   ctx.translate(w/2, h/2 - 50);
   ctx.scale(1 + 0.5 * easeOut(charProg), 1 + 0.5 * easeOut(charProg));
   ctx.translate(-w/2, -h/2);
-  drawHotelScene(ctx, w/2, h/2 + 30, 1, 6, 2);
+  drawHotelScene(ctx, w/2, h/2 + 50, 1, 6, 2);
   ctx.restore();
   
-  drawLabel(ctx, w/2, 60, "7.000 TON • RAHASIA", "#0a0a1a", "#cc3333");
-  drawCaption(ctx, w, h, "HARGA: 250.000 FRANC\nKONTRAK MINGGU DEPAN", clamp(p * 8, 0, 1));
+  drawLabel(ctx, w/2, 80, "7.000 TON • RAHASIA", "#0a0a1a", "#cc3333");
+  drawCaption(ctx, w, h, "HARGA: 250.000 FRANC\nKONTRAK MINGGU DEPAN", clamp(p * 8, 0, 1), 0.85);
 }
 
 function drawScene5(ctx: CanvasRenderingContext2D, w: number, h: number, p: number) {
   const charProg = clamp(p, 0, 1);
-  drawHotelScene(ctx, w/2, h/2 + 30, 1, 6, 2);
+  drawHotelScene(ctx, w/2, h/2 + 50, 1, 6, 2);
   drawCharacter(ctx, w/2 - 80, h/2 - 40, 0.5, {
     suitColor: "#2a2a3e",
     mouth: "concerned",
@@ -745,30 +745,30 @@ function drawScene5(ctx: CanvasRenderingContext2D, w: number, h: number, p: numb
     mouth: "smirk",
     headTilt: -0.1,
   });
-  drawLabel(ctx, w/2, 60, "POISSON RAGU", "#0a0a1a", "#ffaa44");
-  drawCaption(ctx, w, h, "LUSTIG BISIK: KORUPSI = BUKTI KEASLIAN", clamp(p * 8, 0, 1));
+  drawLabel(ctx, w/2, 80, "POISSON RAGU", "#0a0a1a", "#ffaa44");
+  drawCaption(ctx, w, h, "LUSTIG BISIK: KORUPSI = BUKTI KEASLIAN", clamp(p * 8, 0, 1), 0.85);
 }
 
 function drawScene6(ctx: CanvasRenderingContext2D, w: number, h: number, p: number) {
   const charProg = clamp(p, 0, 1);
   const moneyFloat = p * 3;
-  drawHotelScene(ctx, w/2, h/2 + 30, 1, 6, 2);
-  drawBriefcase(ctx, w/2, h/2 + 150, 0.8, charProg, moneyFloat);
-  drawLabel(ctx, w/2, 60, "SUAP 50.000 FRANC", "#0a0a1a", "#33cc77");
-  drawCaption(ctx, w, h, "KONTRAK DITANDATANGANI MALAM ITU", clamp(p * 8, 0, 1));
+  drawHotelScene(ctx, w/2, h/2 + 50, 1, 6, 2);
+  drawBriefcase(ctx, w/2, h/2 + 200, 0.8, charProg, moneyFloat);
+  drawLabel(ctx, w/2, 80, "SUAP 50.000 FRANC", "#0a0a1a", "#33cc77");
+  drawCaption(ctx, w, h, "KONTRAK DITANDATANGANI MALAM ITU", clamp(p * 8, 0, 1), 0.85);
 }
 
 function drawScene7(ctx: CanvasRenderingContext2D, w: number, h: number, p: number) {
   const charProg = clamp(p, 0, 1);
-  drawPoliceStation(ctx, w/2, h/2 + 50, 1, charProg);
-  drawLabel(ctx, w/2, 60, "POISSON MALU • TIDAK LAPOR", "#0a0a1a", "#cc3333");
-  drawCaption(ctx, w, h, "KORBAN KORUPSI TAK AKAN BICARA", clamp(p * 8, 0, 1));
+  drawPoliceStation(ctx, w/2, h/2 + 80, 1, charProg);
+  drawLabel(ctx, w/2, 80, "POISSON MALU • TIDAK LAPOR", "#0a0a1a", "#cc3333");
+  drawCaption(ctx, w, h, "KORBAN KORUPSI TAK AKAN BICARA", clamp(p * 8, 0, 1), 0.85);
 }
 
 function drawScene8(ctx: CanvasRenderingContext2D, w: number, h: number, p: number) {
   const charProg = clamp(p, 0, 1);
   const speed = 1 + charProg;
-  drawHotelScene(ctx, w/2, h/2 + 30, 1, 6);
+  drawHotelScene(ctx, w/2, h/2 + 50, 1, 6);
   ctx.strokeStyle = "rgba(255,187,0,0.6)";
   ctx.lineWidth = 2;
   for (let i = 0; i < 12; i++) {
@@ -789,8 +789,8 @@ function drawScene8(ctx: CanvasRenderingContext2D, w: number, h: number, p: numb
   ctx.font = "bold 24px monospace";
   ctx.textAlign = "center";
   ctx.fillText("2x LEBIH CEPAT", w/2, 86);
-  drawLabel(ctx, w/2, 60, "RONDE 2 • UANG LAGI", "#0a0a1a", "#ffd700");
-  drawCaption(ctx, w, h, "KALI INI DEALER JUJUR LAPOR POLISI", clamp(p * 8, 0, 1));
+  drawLabel(ctx, w/2, 80, "RONDE 2 • UANG LAGI", "#0a0a1a", "#ffd700");
+  drawCaption(ctx, w, h, "KALI INI DEALER JUJUR LAPOR POLISI", clamp(p * 8, 0, 1), 0.85);
 }
 
 function drawScene9(ctx: CanvasRenderingContext2D, w: number, h: number, p: number) {
@@ -798,8 +798,8 @@ function drawScene9(ctx: CanvasRenderingContext2D, w: number, h: number, p: numb
   ctx.fillStyle = "#0a0a1a";
   ctx.fillRect(0, 0, w, h);
   
-  drawLabel(ctx, w/2, 100, "POLISI BURU", "#cc3333", "#ffffff");
-  drawLabel(ctx, w/2, 160, "LUSTIG LARI KE NEW YORK", "#0a0a1a", "#ffd700");
+  drawLabel(ctx, w/2, 120, "POLISI BURU", "#cc3333", "#ffffff");
+  drawLabel(ctx, w/2, 180, "LUSTIG LARI KE NEW YORK", "#0a0a1a", "#ffd700");
   
   ctx.strokeStyle = COLORS.gold;
   ctx.lineWidth = 2;
@@ -810,61 +810,61 @@ function drawScene9(ctx: CanvasRenderingContext2D, w: number, h: number, p: numb
   ctx.stroke();
   ctx.setLineDash([]);
   
-  drawShip(ctx, w/2, h/2 + 100, 1, charProg);
-  drawCaption(ctx, w, h, "TARGET BERIKUTNYA: AL CAPONE", clamp(p * 8, 0, 1));
+  drawShip(ctx, w/2, h/2 + 120, 1, charProg);
+  drawCaption(ctx, w, h, "TARGET BERIKUTNYA: AL CAPONE", clamp(p * 8, 0, 1), 0.85);
 }
 
 function drawScene10(ctx: CanvasRenderingContext2D, w: number, h: number, p: number) {
   const charProg = clamp(p, 0, 1);
-  drawShip(ctx, w/2, h/2 + 50, 1, charProg);
+  drawShip(ctx, w/2, h/2 + 80, 1, charProg);
   
-  drawCharacter(ctx, w/2 - 200, h/2 - 80, 0.5, {
+  drawCharacter(ctx, w/2 - 180, h/2 - 100, 0.5, {
     suitColor: "#1a1a2e",
     mouth: "speakA",
     headTilt: 0.1,
   });
-  drawCharacter(ctx, w/2 + 200, h/2 - 80, 0.5, {
+  drawCharacter(ctx, w/2 + 180, h/2 - 100, 0.5, {
     suitColor: "#2a2a2e",
     mouth: "surprised",
     headTilt: -0.1,
   });
   
-  drawLabel(ctx, w/2 - 200, h/2 - 150, "LUSTIG", "#0a0a1a", "#ffd700");
-  drawLabel(ctx, w/2 + 200, h/2 - 150, "CAPONE", "#0a0a1a", "#ffaa44");
-  drawLabel(ctx, w/2, 60, "INVESTASI 50K DOLLAR", "#0a0a1a", "#ffd700");
-  drawCaption(ctx, w, h, "CAPONE BERI 1K HADIAH KEJUJURAN", clamp(p * 8, 0, 1));
+  drawLabel(ctx, w/2 - 180, h/2 - 180, "LUSTIG", "#0a0a1a", "#ffd700");
+  drawLabel(ctx, w/2 + 180, h/2 - 180, "CAPONE", "#0a0a1a", "#ffaa44");
+  drawLabel(ctx, w/2, 80, "INVESTASI 50K DOLLAR", "#0a0a1a", "#ffd700");
+  drawCaption(ctx, w, h, "CAPONE BERI 1K HADIAH KEJUJURAN", clamp(p * 8, 0, 1), 0.85);
 }
 
 function drawScene11(ctx: CanvasRenderingContext2D, w: number, h: number, p: number) {
   const glowPulse = p * 0.5;
   drawEiffelNight(ctx, w/2, h/2, 1.2, glowPulse);
   
-  drawCharacter(ctx, w/2 - 250, h/2 + 50, 0.5, {
+  drawCharacter(ctx, w/2 - 220, h/2 + 80, 0.5, {
     suitColor: "#0a0a1a",
     hat: true,
     mouth: "concerned",
     headTilt: 0.15,
   });
-  drawCharacter(ctx, w/2 + 250, h/2 + 50, 0.5, {
+  drawCharacter(ctx, w/2 + 220, h/2 + 80, 0.5, {
     suitColor: "#1a1a2e",
     mouth: "neutral",
   });
   
-  drawLabel(ctx, w/2 - 250, h/2 - 100, "LUSTIG", "#0a0a1a", "#ffd700");
-  drawLabel(ctx, w/2 + 250, h/2 - 100, "FBI", "#0a0a1a", "#cc3333");
-  drawLabel(ctx, w/2, 60, "DITANGKAP 1935", "#cc3333", "#ffffff");
-  drawCaption(ctx, w, h, "ALCATRAZ 20 TAHUN • MENINGGAL 1947", clamp(p * 8, 0, 1));
+  drawLabel(ctx, w/2 - 220, h/2 - 80, "LUSTIG", "#0a0a1a", "#ffd700");
+  drawLabel(ctx, w/2 + 220, h/2 - 80, "FBI", "#0a0a1a", "#cc3333");
+  drawLabel(ctx, w/2, 80, "DITANGKAP 1935", "#cc3333", "#ffffff");
+  drawCaption(ctx, w, h, "ALCATRAZ 20 TAHUN • MENINGGAL 1947", clamp(p * 8, 0, 1), 0.85);
 }
 
 function drawScene12(ctx: CanvasRenderingContext2D, w: number, h: number, p: number) {
   ctx.fillStyle = COLORS.bg;
   ctx.fillRect(0, 0, w, h);
   
-  drawEiffelTower(ctx, w/2, h/2 + 50, 1.8, 0.5 + 0.5 * Math.sin(p * 2));
+  drawEiffelTower(ctx, w/2, h/2 + 50, 2.0, 0.5 + 0.5 * Math.sin(p * 2));
   
-  drawLabel(ctx, w/2, 80, "MASIH BERDIRI", "#0a0a1a", "#33cc77");
-  drawLabel(ctx, w/2, 140, "BELUM PERNAH DIJUAL RESMI", "#0a0a1a", "#ffd700");
-  drawCaption(ctx, w, h, "TERLALU BAGUS JADI NYATA? BOHONG.\nTERLALU RAHASIA? PASTIKAN SIAPA UNTUNG.", clamp(p * 8, 0, 1));
+  drawLabel(ctx, w/2, 100, "MASIH BERDIRI", "#0a0a1a", "#33cc77");
+  drawLabel(ctx, w/2, 160, "BELUM PERNAH DIJUAL RESMI", "#0a0a1a", "#ffd700");
+  drawCaption(ctx, w, h, "TERLALU BAGUS JADI NYATA? BOHONG.\nTERLALU RAHASIA? PASTIKAN SIAPA UNTUNG.", clamp(p * 8, 0, 1), 0.85);
 }
 
 function drawScene13(ctx: CanvasRenderingContext2D, w: number, h: number, p: number) {
@@ -894,21 +894,21 @@ export function drawFrame(ctx: CanvasRenderingContext2D, w: number, h: number, p
   ctx.fillStyle = COLORS.bg;
   ctx.fillRect(0, 0, w, h);
   
-  // Scene boundaries in frames (5400 total)
+  // Scene boundaries in frames (3600 total = 2 min @ 30fps)
   const scenes = [
     { end: 300, fn: drawScene1 },      // 0-300 (10s)
-    { end: 750, fn: drawScene2 },      // 300-750 (15s)
-    { end: 1200, fn: drawScene3 },     // 750-1200 (15s)
-    { end: 1650, fn: drawScene4 },     // 1200-1650 (15s)
-    { end: 2100, fn: drawScene5 },     // 1650-2100 (15s)
-    { end: 2550, fn: drawScene6 },     // 2100-2550 (15s)
-    { end: 3000, fn: drawScene7 },     // 2550-3000 (15s)
-    { end: 3450, fn: drawScene8 },     // 3000-3450 (15s)
-    { end: 3900, fn: drawScene9 },     // 3450-3900 (15s)
-    { end: 4350, fn: drawScene10 },    // 3900-4350 (15s)
-    { end: 4800, fn: drawScene11 },    // 4350-4800 (15s)
-    { end: 5100, fn: drawScene12 },    // 4800-5100 (10s)
-    { end: 5400, fn: drawScene13 },    // 5100-5400 (10s)
+    { end: 600, fn: drawScene2 },      // 300-600 (10s)
+    { end: 900, fn: drawScene3 },      // 600-900 (10s)
+    { end: 1200, fn: drawScene4 },     // 900-1200 (10s)
+    { end: 1500, fn: drawScene5 },     // 1200-1500 (10s)
+    { end: 1800, fn: drawScene6 },     // 1500-1800 (10s)
+    { end: 2100, fn: drawScene7 },     // 1800-2100 (10s)
+    { end: 2400, fn: drawScene8 },     // 2100-2400 (10s)
+    { end: 2700, fn: drawScene9 },     // 2400-2700 (10s)
+    { end: 3000, fn: drawScene10 },    // 2700-3000 (10s)
+    { end: 3200, fn: drawScene11 },    // 3000-3200 (6.7s)
+    { end: 3400, fn: drawScene12 },    // 3200-3400 (6.7s)
+    { end: 3600, fn: drawScene13 },    // 3400-3600 (6.7s)
   ];
   
   let frameStart = 0;
@@ -925,13 +925,13 @@ export function drawFrame(ctx: CanvasRenderingContext2D, w: number, h: number, p
 const MoneyStoryCanvas = ({ frame, progress }: { frame: number; progress: number }) => {
   return (
     <HtmlInCanvas
-      width={1280}
-      height={720}
+      width={720}
+      height={1280}
       onPaint={(params: any) => {
         const canvas = params.canvas || params;
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
-        drawFrame(ctx, 1280, 720, progress, frame);
+        drawFrame(ctx, 720, 1280, progress, frame);
       }}
     >
       <div />
@@ -939,7 +939,7 @@ const MoneyStoryCanvas = ({ frame, progress }: { frame: number; progress: number
   );
 };
 
-export const MoneyStoryLongform = () => {
+export const MoneyStoryShorts = () => {
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
   const progress = frame / durationInFrames;
@@ -949,12 +949,12 @@ export const MoneyStoryLongform = () => {
 export const MyComposition = () => {
   return (
     <Composition
-      id="MoneyStoryLongform"
-      component={MoneyStoryLongform}
-      durationInFrames={5400}
+      id="MoneyStoryShorts"
+      component={MoneyStoryShorts}
+      durationInFrames={3600}
       fps={30}
-      width={1280}
-      height={720}
+      width={720}
+      height={1280}
       calculateMetadata={calculateMetadata}
     />
   );
